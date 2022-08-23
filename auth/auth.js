@@ -1,57 +1,36 @@
-// import services and utilities
-import { getUser, signIn, signUp } from '../services/auth-service.js';
 
-// component creators
-import createAuthForm from '../components/AuthForm.js';
+import { redirectIfLoggedIn, signInUser, signupUser } from '../services/fetch-utils.js';
 
-let errorMessage = '';
-let isSignUp = false;
-let redirectUrl = '../';
 
-// handler functions
-async function handlePageLoad() {
-    const user = getUser();
+const signInForm = document.getElementById('sign-in');
+const signInEmail = document.getElementById('sign-in-email');
+const signInPassword = document.getElementById('sign-in-password');
+
+const signUpForm = document.getElementById('sign-up');
+const signUpEmail = document.getElementById('sign-up-email');
+const signUpPassword = document.getElementById('sign-up-password');
+
+// if user currently logged in, redirect
+redirectIfLoggedIn();
+
+signUpForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const user = await signupUser(signUpEmail.value, signUpPassword.value);
+
     if (user) {
-        location.replace('../');
-        return;
+        redirectIfLoggedIn();
+    } else {
+        console.error(user);
     }
+});
 
-    const params = new URLSearchParams(location.search);
-    redirectUrl = params.get('redirectUrl') || '../';
+signInForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const user = await signInUser(signInEmail.value, signInPassword.value);
 
-    display();
-}
-
-async function handleAuth(email, password) {
-    const authMethod = isSignUp ? signUp : signIn;
-
-    const { error } = await authMethod(email, password);
-
-    if (error) {
-        // eslint-disable-next-line no-console
-        console.log(error);
-        errorMessage = error.message;
-        display();
+    if (user) {
+        redirectIfLoggedIn();
+    } else {
+        console.error(user);
     }
-    else {
-        location.replace(redirectUrl);
-    }
-}
-
-function handleChangeType() {
-    isSignUp = !isSignUp;
-    display();
-}
-
-// Create each component: 
-const AuthForm = createAuthForm(
-    document.querySelector('#auth-form'),
-    { handleAuth, handleChangeType }
-);
-
-function display() {
-    AuthForm({ isSignUp, errorMessage });
-}
-
-// Call handle page load
-handlePageLoad();
+})

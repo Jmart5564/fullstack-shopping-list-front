@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="icon" type="image/x-icon" href="../assets/alchemy-favicon.png" />
-    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
@@ -24,21 +23,32 @@
     </header>
 
     <main>
-        <form id="auth-form">
-            <h2></h2>
-            <label>
-                Email
-                <input type="email" name="email" required />
-            </label>
-            <label>
-                Password
-                <input type="password" name="password" required />
-            </label>
-            <button></button>
-            <p class="error"></p>
-            <p class="change-type"></p>
-        </form>
-
+        <div class="auth-main">
+            <div class="left">
+                <div class="auth-container">
+                    <form id="sign-in">
+                        <h3>Sign In</h3>
+                        <label>Email </label
+                        ><input type="email" name="email" id="sign-in-email" />
+                        <label>Password </label
+                        ><input type="password" name="password" id="sign-in-password" />
+                        <button>Submit</button>
+                    </form>
+                </div>
+            </div>
+            <div class="right">
+                <div class="auth-container">
+                    <form id="sign-up">
+                        <h3>Sign Up</h3>
+                        <label>Email </label
+                        ><input type="email" name="email" id="sign-up-email" />
+                        <label>Password </label
+                        ><input type="password" name="password" id="sign-up-password" />
+                        <button>Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer>&copy;2022 Aspiring Software Developer</footer>

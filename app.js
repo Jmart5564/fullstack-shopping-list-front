@@ -1,31 +1,32 @@
-import { getUser, signOut } from './services/auth-service.js';
-import { protectPage } from './utils.js';
-import createUser from './components/User.js';
+import { getUser, logout } from './services/fetch-utils';
 
 // State
-let user = null;
 
 // Action Handlers
 async function handlePageLoad() {
-    user = getUser();
-    protectPage(user);
-
+    const user = await getUser();
+    if (!user) location.replace('../');
     display();
 }
 
 async function handleSignOut() {
-    signOut();
+    logout();
 }
 
-// Components 
-const User = createUser(
-    document.querySelector('#user'),
+function createLogoutButton(button, { handleSignOut }) {
+    button.addEventListener('click', () => {
+        handleSignOut();
+    });
+    return () => {};
+}
+
+const CreateLogoutButton = createLogoutButton(
+    document.querySelector('#logout'),
     { handleSignOut }
 );
 
 function display() {
-    User({ user });
-
+    CreateLogoutButton();
 }
 
 handlePageLoad();
