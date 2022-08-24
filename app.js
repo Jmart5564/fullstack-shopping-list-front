@@ -1,14 +1,15 @@
-import { getUser, logout } from './services/fetch-utils';
+import { checkAuth, logout } from './services/fetch-utils.js';
 
 // State
 
 // Action Handlers
-async function handlePageLoad() {
-    const user = await getUser();
-    if (!user) location.replace('../');
-    display();
-}
+checkAuth();
+
+const logoutButton = document.getElementById('logout');
+
+logoutButton.addEventListener('click', () => {
+    console.log('button clicked');
+    logout();
+});
 
 
-
-handlePageLoad();
