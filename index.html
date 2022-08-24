@@ -19,14 +19,22 @@
 
 <body>
     <header>
-        <img src="./assets/html_css_js.png">
-        <h1>Cool Web App</h1>
+        <h1>ToDo List</h1>
         <div id="user"></div>
+        <button id="logout">Log Out</button>
     </header>
 
-    <main>
+    <section class="todoapp">
+        <header class="header">
+            <input class="new-todo" placeholder="What needs to be done?" autofocus>
+        </header>
+        <section class="main">
+            <input id="toggle-all" class="toggle-all" type="checkbox">
+            <label for="toggle-all">Mark all as complete</label>
+            <ul class="todo-list">
+            </ul>
+        </section>
 
-    </main>
 
     <footer>&copy;2022 Aspiring Software Developer</footer>
 
