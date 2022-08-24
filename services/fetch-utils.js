@@ -23,7 +23,7 @@ export async function getUser() {
 export async function checkAuth() {
     const user = await getUser();
 
-    if (!user) location.replace('../');
+    if (!user) location.replace('../auth');
 }
 
 export async function redirectIfLoggedIn() {
@@ -81,7 +81,7 @@ export async function logout() {
         mode: 'cors',
     });
     if (resp.ok) {
-        location.replace('./auth');
+        location.replace('../auth');
     } else {
         throw new Error('Unable to logout');
     }

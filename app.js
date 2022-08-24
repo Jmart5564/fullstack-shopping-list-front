@@ -9,24 +9,6 @@ async function handlePageLoad() {
     display();
 }
 
-async function handleSignOut() {
-    logout();
-}
 
-function createLogoutButton(button, { handleSignOut }) {
-    button.addEventListener('click', () => {
-        handleSignOut();
-    });
-    return () => {};
-}
-
-const CreateLogoutButton = createLogoutButton(
-    document.querySelector('#logout'),
-    { handleSignOut }
-);
-
-function display() {
-    CreateLogoutButton();
-}
 
 handlePageLoad();
